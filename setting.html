@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>iLeave | Status</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+
+  <!-- jQuery library -->
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.slim.min.js"></script>
+
+  <!-- Popper JS -->
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+
+  <!-- Latest compiled JavaScript -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="">
+  <link rel="icon" href="images/logo.svg">
+  <link rel="stylesheet" href="assets/css/newdashboard.css">
+  <link rel="stylesheet" href="assets/css/updateprofile.css">
+  <!-- <link rel="stylesheet" href="assets/css/completeprofile.css">-->
+  <link rel="stylesheet" href="assets/css/newapplyleave.css">
+  <link rel="stylesheet" href="assets/css/front.css">
+  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+  <script>
+    $(function () {
+      $("#profilecontent").load("profile.html");
+      $("#footer").load("footer.html");
+      $("#sidebar").load("sidebar.html");
+      $("#logout").load("logout.html");
+    });
+  </script>
+  <script defer src="assets/js/getProfileDetails.js"></script>
+  <script defer src="assets/js/updateprofile.js"></script>
+</head>
+
+<body>
+  <div id="loading-screen">
+    <div id="loader">
+      <div id="shadow"></div>
+      <div id="box"></div>
+    </div>
+  </div>
+  <div id="errorPopup" class="popuperr card-header cpopup ">
+    <div class="popup-content2 ">
+      <img src="images/error.svg">
+      <div class="modal-header d-flex justify-content-center">
+        <h1 class="modal-title red" id="errorStatusCode">Status</h1>
+      </div>
+      <div class="d-flex justify-content-center">
+        <p id="errorPopupMsg"></p>
+      </div>
+      <div class="modal-footer d-flex justify-content-center">
+        <button class="btn btn-outline-warning" onclick="errorPopupClose()"></i>ok</button>
+      </div>
+    </div>
+  </div>
+  <div id="popup3" class="popup card-header">
+    <div class="popup-content">
+      <div class="modal-header d-flex justify-content-center">
+        <h4 class="modal-title">Successfully Registered</h4>
+      </div>
+      <div class="d-flex justify-content-center">
+        <p id="logmsg">You are registered, Plz complete your profile</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" onclick="complete_profile()" class="btn btn-danger" data-dismiss="modal">Ok</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="popup2" hidden="true" class="popup card-header ">
+    <div class="popup-content2 ">
+      <img src="images/error.svg">
+      <h1 class="modal-title red d-flex justify-content-center" id="statuserror">Status</h1>
+      <div class="modal-header d-flex justify-content-center">
+        <h4 class="modal-title red" id="statuserrortext">Status</h4>
+      </div>
+      <div class="d-flex justify-content-center">
+        <p id="msgerror">You Need to Login First</p>
+      </div>
+      <div class="modal-footer d-flex justify-content-center">
+        <button class="btn btn-outline-warning" onclick="login()"></i>ok</button>
+      </div>
+    </div>
+
+  </div>
+
+
+  </div>
+
+  <div id="logout"></div>
+  <input type="checkbox" id="nav-toggle">
+  <div class="sidebar mb-2">
+    <div class="sidebar-brand">
+      <span class="d-flex">
+        <img class="img-logo mr-2 " src="images/logo.svg">
+        <img class="img-logo-name" src="images/name.svg" alt=""></span>
+    </div>
+
+    <div class="sidebar-menu">
+      <ul>
+        <li>
+          <a href="dashboard.html"  id="linkname">
+            <span class="fa fa-clone"></span>
+            <span>Dashboard</span>
+          </a>
+        </li>
+        <li id="applyleavesidebar">
+          <a href="applyleave.html">
+            <span class="fa fa-calendar"></span>
+            <span>Apply Leave</span>
+          </a>
+        </li>
+        </li>
+        <li id="statussidebar">
+          <a href="status.html">
+            <span class="fa fa-check-circle-o"></span>
+            <span>Leave Status</span>
+          </a>
+        </li>
+        <li>
+          <a href="approval.html" >
+            <span class="fa fa-calendar-check-o"></span>
+            <span>Leave Approval</span>
+          </a>
+        </li>
+        <li>
+          <a href="setting.html"  class="active">
+            <span class="fa fa-cog"></span>
+            <span>Setting</span>
+          </a>
+        </li>
+        <li>
+          <a class="logout" onclick="openPopup()">
+            <span class="fa fa-sign-out"></span>
+            <span>Sign Out</span>
+          </a>
+        </li>
+      </ul>
+
+    </div>
+  </div>
+
+  <div id="popup4" class="popup card-header">
+    <div class="popup-content4">
+      <span class="close" onclick="close_updatepopup()">&times;</span>
+      <!-- <div class="modal-header d-flex justify-content-center">
+        <h4 class="modal-title">Successfull !</h4>
+      </div> -->
+      <div class="d-flex justify-content-center">
+        <p id="updateMessage">Your profile is updated Successfully !</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" onclick="close_updatepopup()" class="btn btn-danger" data-dismiss="modal">Ok</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- deletepopup -->
+  <div id="deletepopup" class="popup card-header">
+    <div class="popup-content3">
+      <div class="modal-header row d-flex justify-content-center">
+
+        <img src="images/error.png" alt="">
+        <h4 class="modal-title ml-2">Account Delete</h4>
+
+      </div>
+      <div class="d-flex justify-content-center">
+        <p>Are You Sure You Want delete your account</p>
+      </div>
+      <div class="modal-footer d-flex justify-content-center">
+        <button class="delete"><i class="fa fa-sign-out"></i>ok</button>
+        <button onclick="closePopup()">Cancel</button>
+      </div>
+    </div>
+  </div>
+  <div id="resetLeaveByPrincipal" class="popup card-header ">
+    <div class="popup-content3 ">
+      <div class="modal-header row d-flex justify-content-center">
+
+        <img src="images/error.png" alt="">
+        <h4 class="modal-title ml-2">Reset All Leaves</h4>
+      </div>
+
+      <div class="d-flex justify-content-center">
+        <p id="msgConfirmation">Are you sure ? to reset Leave...</p>
+      </div>
+      <div class="modal-footer d-flex justify-content-center">
+        <button onclick="resetLeavePopupDone()"></i>ok</button>
+        <button onclick="resetLeavePopupClose()"></i>cancel</button>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="main-content">
+    <header>
+      <h2 class="head">
+        <label class="big" for="nav-toggle">
+          <span class="fa fa-bars"></span>
+        </label>
+        Setting
+      </h2>
+      <div id="profilecontent"></div>
+    </header>
+
+    <main>
+      <div class="recents-grid mt-4">
+        <div class="projects">
+          <div class="card">
+
+            <div class="card-body">
+              <h4 class="ml-3">Update Profile&nbsp;<button type="button" class="editProfile fa fa-edit"
+                  style=" color: #f57c00;background:none;font-size: 35px;"></button></h4>
+              <div class="row align-items-center">
+                <div class="col-lg-4  mb-lg-0">
+                  <div class="upload ml-4">
+                    <img src="images/profile.png" width="200" height="200" alt="...">
+                    <div class="round" id="round">
+                      <input id="file" type="file" />
+                      <i class="fa fa-camera" style="color:black;font-size: 25px;"></i>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-lg-8 mb-5 mb-lg-0">
+                  <div class="table-responsive" id="profileform">
+                    <table width="100%" class="table table-striped-columns ">
+                      <thead class=" ttt table-info">
+
+                      </thead>
+                      <tbody class="table-group-divider userAppliedTable">
+                        <tr id="defaultApprovingText">
+                          <td><i class="fa fa-user-circle-o" style="font-size:24px"></i>&nbsp;Name</td>
+                          <td id="entered_name">User1</td>
+                        </tr>
+                        <tr id="defaultApprovingText">
+                          <td><i class="fa fa-envelope" style="font-size:24px"></i>&nbsp;Email</td>
+                          <td id="entered_email">user1@gmail.com</td>
+                        </tr>
+                        <tr id="defaultApprovingText">
+                          <td><i class="fa fa-phone" style="font-size:24px"></i>&nbsp;Phone no</td>
+                          <td id="entered_phoneno">9583946342</td>
+                        </tr>
+                        <tr id="defaultApprovingText">
+                          <td>
+                            <div class="row" style="margin-left: 1px;">
+                              <span><img src="images/icon_designation.png"
+                                  style="font-size:24px"></span><span>&nbsp;Designation</span>
+                            </div>
+                          </td>
+                          <td id="entered_designation">Faculty</td>
+                        </tr>
+                        <tr id="defaultApprovingText">
+                          <td><i class="fa fa-institution" style="font-size:24px"></i>&nbsp;Department</td>
+                          <td id="entered_department">Computer Sciencce</td>
+                        </tr>
+
+                      </tbody>
+
+                    </table>
+                  </div>
+                  <form class="pr-5 mb-5" id="updateform" name="updateform" novalidate="novalidate">
+                    <div class="row">
+
+                      <div class="col-md-6 form-group">
+                        <!-- name -->
+                        <label class="mb-0"><b>Name</b></label>
+                        <div id="Name">
+                          <input type="name" class="form-control namee" name="name" id="name" placeholder="Name"
+                            aria-required="true" aria-invalid="true" value="">
+                        </div>
+                      </div>
+                      <div class="col-md-6 form-group">
+                        <!-- Phone Number -->
+                        <label class="mb-0"><b>Phone Number</b></label>
+                        <div id="number">
+                          <input type="number" class="form-control phone_no" name="mob_no" id="phone_no" value=""
+                            placeholder="Contact No." aria-required="true" aria-invalid="true">
+                        </div>
+                      </div>
+
+                    </div>
+                    <div class=" form-group">
+                      <!-- Email  -->
+                      <label class="mb-0"><b>Email</b></label>
+                      <div id="email">
+                        <input type="email" class="form-control email" name="email" id="emailOfUpdateProfile"
+                          placeholder="" value="" aria-required="true" aria-invalid="true">
+                      </div>
+                    </div>
+                    <div class="row">
+
+                      <div class="col-md-6 form-group">
+                        <!-- Designation -->
+                        <label class="mb-0"><b>Designation</b></label>
+                        <div>
+                          <select class="form-control designation">
+                            <option name="reference3" id="Designation" value="">Designation</option>
+                            <option value="faculty">Faculty</option>
+                            <option value="HOD">HOD</option>
+                            <option value="non-tech-employee">Non-Tech-Employee</option>
+                            <option value="non-tech-head">Non-Tech-Head</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="col-md-6 form-group">
+                        <!-- Department -->
+                        <label class="mb-0"><b>Department</b></label>
+                        <div>
+                          <select class="form-control department" id="department">
+                            <option name="reference3" id="Department" value="">Department</option>
+                            <option value="Computer Science">Computer Science</option>
+                            <option value="Information Tecnology">Information Tecnology</option>
+                            <option value="ET & T">ET & T</option>
+                            <option value="Mechanical">Mechanical</option>
+                            <option value="Mining">Mining</option>
+                            <option value="Electrical">Electrical</option>
+                            <option value="Civil">Civil</option>
+                            <option value="non-tech">Non-Tech</option>
+                          </select>
+                        </div>
+                      </div>
+
+                    </div>
+                    <div class="row">
+
+                      <div class="col-md-6 form-group">
+                        <!-- Contract_type -->
+                        <label class="mb-0"><b>Contract Type</b></label>
+                        <div>
+                          <select class="form-control contract_type" id="contract_type">
+                            <option id="Contract_type">parmanent</option>
+                            <option>contract</option>
+
+
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+
+
+                    <div class="row d-flex justify-content-center">
+                      <button style="width:200px;height: 50px;" class="update">Update</button>
+                    </div>
+                  </form>
+                </div>
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+        <div class="recents-grid mt-4 mb-4">
+          <div class="projects">
+            <div class="card">
+              <div class="card-header">
+                <h4>Want to change your password</h4>
+
+                <button onclick="changepassword()">change Password</button>
+
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="resetAllLeaveByPrincipal" hidden class="recents-grid mt-4 mb-4">
+          <div class="projects">
+            <div class="card">
+              <div class="card-header">
+                <h4>Want to reset all Leave ?</h4>
+                <button onclick="resetLeavePopup()">Reset Leave</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="recents-grid mt-4 mb-4">
+          <div class="projects">
+            <div class="card">
+              <div class="card-header">
+                <h4>Want to delete your account</h4>
+
+                <button onclick="deletepopup()">Delete Account</button>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+  </div>
+
+  </main>
+  </div>
+
+<div id="footer"></div>
+</body>
+
+</html>

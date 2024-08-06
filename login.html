@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Login|Register</title>
+  <link rel="stylesheet" href="assets/css/newlogin.css">
+  <link rel="icon" href="images/logo.svg">
+  <!-- <link rel="stylesheet" href="assets/css/emailverified.css"> -->
+  <script defer src="assets/js/login&regi.js"></script>
+</head>
+
+<body>
+  <div id="loading-screen">
+    <div id="loader">
+      <div id="shadow"></div>
+      <div id="box"></div>
+    </div>
+  </div>
+  <div class="container" id="container">
+    <div class="form-container sign-up-container">
+      <!-- <div id="error"></div> -->
+      <form id="form">
+        <!--           REGISTER              -->  
+        <h1>Create Account</h1>
+        <span>use your email for registration</span>
+        <input required type="email" class="email_regi" placeholder="Email" />
+        <div hidden="true" class="error"></div>     
+        <input type="password" class="password_regi " placeholder="Password" />
+        <div class="error"></div>
+        <input required type="password" class="confirmPassword_regi" placeholder="Confirm Password" />
+        <button class="btn_regi">Register</button>
+        <p class="red" id="errormsg"></p>
+
+      </form>
+    </div>
+    <div class="form-container sign-in-container">
+      <form id="LOGform">
+        <span class="row">
+          <h1>Sign in to</h1><img class="logo" src="images/name.svg">
+        </span>
+
+        <span class="span-1">or use your account</span>
+        <input required type="email" class="email_log" placeholder="Email" />
+        <input required type="password" class="password_log" placeholder="Password" />
+        <!-- Trigger/Open The Modal -->
+        <a class="button2" href="sentOTP.html">Forgot your password?</a>
+        <button class=" btn_log" type="submit">Sign In</button>
+
+        <p class="red" id="loginerrormsg"></p>
+      </form>
+
+    </div>
+    <div class="overlay-container">
+      <div class="overlay">
+        <div class="overlay-panel overlay-left">
+          <img class="logo-2" src="images/logo.svg">
+          <h1>Hello, Friend!</h1>
+          <p>Enter your personal details and start journey with us</p>
+          <button class="ghost" id="signIn">Sign In</button>
+        </div>
+        <div class="overlay-panel overlay-right">
+          <img class="logo-2" src="images/logo.svg">
+          <h1>Welcome Back!</h1>
+          <p>To keep connected with us please login with your personal info</p>
+          <button class="ghost" id="signUp">Register</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="myPopup">
+    <div id="content">
+      <div class="modal-header d-flex justify-content-center">
+        <img id="logo" src="images/mail.svg" alt="Logo" />
+      </div>
+      <div class="d-flex justify-content-center">
+        <h2>Email Has been Sent to </h2><label id="emailid">@mail</label>
+        <h2>Please Verify Your Email</h2>
+      </div>
+    </div>
+  </div>
+
+  <div id="overlay">
+    <div class="popupError" id="popupError">
+      <a type="button" class="close_btn" id="close" onclick="closeerrorPopup()">&times</a>
+      <img src="images/error.svg">
+      <h2 id="error_warn">OOpps!</h2>
+      <p id="error_msg">ERROR 400.Reload!</p>
+
+      <button type="button" class="btn_close" onclick="closeerrorPopup()">Ok</button>
+    </div>
+  </div>
+
+
+
+
+  <!-- The Modal -->
+
+
+  <footer class="d-flex mt-3 justify-content-center">
+    <p>
+      Created by
+      <a target="_blank" href="https://github.com/GauravNirala05">Gaurav</a>,
+      <a target="_blank" href="https://github.com/dewanganRachna">Rachna</a> and
+      <a target="_blank" href="https://github.com/Jiteshayam">Jitesh</a>
+    </p>
+  </footer>
+</body>
+
+</html>
